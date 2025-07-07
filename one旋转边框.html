@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    background-color: black;
+  }
+
+  button {
+    top: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    padding: 15px 30px;
+    font-size: 16px;
+    color: #fff;
+    background-color: black;
+    border: none;
+    /* outline: 4px solid #fff; */
+    border-radius: 10%;
+    /* 圆角按钮 */
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+  }
+
+  /* 创建边框效果 */
+  button::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border-radius: 12px;
+    background: blue;
+    /* 稍微大一点以覆盖边框 */
+    z-index: -2;
+    top: 50%;
+    left: 50%;
+    animation: move 3s infinite linear;
+    transform-origin: left top;
+  }
+
+  button::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: black;
+    z-index: -1;
+    border-radius: inherit;
+  }
+
+  @keyframes move {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<body>
+  <button>点击我</button>
+</body>
+
+</html>
