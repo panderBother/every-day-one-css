@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    * {
+      /* 重置样式 */
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    section{
+      /* 流式布局 */
+      display: flex;
+      /* 居中 */
+      justify-content: center;
+      /* 居中 */
+      align-items: center;
+      /* 最小高度 100% 屏幕高度 */
+      min-height: 100vh;
+      /* 背景色 纯黑 */
+      background-color: #3b0101;
+      animation: bg-anim 5s linear infinite;
+    }
+    @keyframes bg-anim {
+      0% {
+       filter: hue-rotate(0deg);
+      }
+      
+      100% {
+       filter: hue-rotate(360deg);
+      }
+    }
+    section .loader {
+      /* 盒子模型 */
+      position: relative;
+      /* 宽度 150px */
+      width: 150px;
+      /* 高度 150px */
+      height: 150px;
+    }
+    section .loader span {
+      /* 盒子模型 absolute 绝对定位 */
+      position: absolute;
+      /* 顶部 0 */
+      top: 0;
+      /* 左侧 0 */
+      left: 0;
+      /* 宽度 100% */
+      width: 100%;
+      /* 高度 100% */
+      height: 100%;
+      transform: rotate(calc(var(--i) * 18deg));
+    }
+    section .loader span::before {
+      /* 盒子模型 absolute 绝对定位 */
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 15px;
+      height: 15px;
+      background: #bd0404;
+      /* 圆角 50%  */
+      border-radius: 50%; 
+      box-shadow: 
+                  0 0 10px #bd0404,   /* 内层模糊阴影 */
+                  0 0 20px #bd0404,   /* 稍外层模糊阴影 */
+                  0 0 40px #bd0404,   /* 中层模糊阴影 */
+                  0 0 60px #bd0404,   /* 中外层模糊阴影 */
+                  0 0 80px #bd0404,   /* 次外层模糊阴影 */
+                  0 0 100px #bd0404;  /* 最外层模糊阴影 */
+                  /* 动画 两秒循环一圈 */
+      animation: animate 2s linear infinite;
+      /* 延迟 0.1s 播放 动画 */
+      animation-delay: calc(var(--i) * 0.1s);
+    }
+    @keyframes animate {
+      0% {
+        /* 缩放  1为100% */
+        transform: scale(1);
+      }
+      100% {
+        /* 缩放  0为0% */
+        transform: scale(0);
+      }
+    }
+
+  </style>
+  <section>
+    <div class="loader">
+      <!-- style="--i:1"自定义属性，--i为自定义属性名，1为自定义属性值 -->
+      <span style="--i:1"></span>
+      <span style="--i:2"></span>
+      <span style="--i:3"></span>
+      <span style="--i:4"></span>
+      <span style="--i:5"></span>
+      <span style="--i:6"></span>
+      <span style="--i:7"></span>
+      <span style="--i:8"></span>
+      <span style="--i:9"></span>
+      <span style="--i:10"></span>
+      <span style="--i:11"></span>
+      <span style="--i:12"></span>
+      <span style="--i:13"></span>
+      <span style="--i:14"></span>
+      <span style="--i:15"></span>
+      <span style="--i:16"></span>
+      <span style="--i:17"></span>
+      <span style="--i:18"></span>
+      <span style="--i:19"></span>
+      <span style="--i:20"></span>
+    </div>
+  </section>
+</body>
+</html>
