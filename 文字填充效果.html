@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* 设置字体 */
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 设置最小高度 */
+    min-height: 100vh;
+    background: #000;
+  }
+  h2{
+    position: relative;
+    font-size: 15vw;
+    color: #000;
+    -webkit-text-stroke: 0.2vw skyblue;
+    /* 大写 */
+    text-transform: uppercase;
+  }
+  h2::before{
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    color: skyblue;
+    -webkit-text-stroke: 0vw #000;
+    border-right: 2px skyblue;
+    overflow: hidden;
+    animation: animate 3s linear infinite; 
+  /* 关键：先正向、再反向 */
+  animation-direction: alternate; 
+  /* 保持最后一帧（回到初始状态） */
+  animation-fill-mode: forwards; 
+    
+  }
+  @keyframes animate {
+    0%{
+      width: 0;
+    }
+    100%{
+      width: 100%;
+    }
+  }
+</style>
+<body>
+  <h2 data-text="Loading...">Loading...</h2>
+</body>
+</html>
