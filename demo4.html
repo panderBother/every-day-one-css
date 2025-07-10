@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotating Border Animation</title>
+  <style>
+    /* 定义全局CSS变量，便于统一修改和维护 */
+    :root {
+      --box-size: 200px;          /* 动画容器的尺寸 */
+      --color-primary: aqua;       /* 主色调：青色 */
+      --color-bg: #000;            /* 背景色：纯黑色 */
+    }
+
+    /* 重置默认样式，确保所有浏览器渲染一致 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* 页面主体样式 */
+    body {
+      display: flex;              /* 使用Flex布局 */
+      justify-content: center;    /* 水平居中 */
+      align-items: center;        /* 垂直居中 */
+      min-height: 100vh;          /* 最小高度为视口高度 */
+      background: var(--color-bg); /* 设置背景色 */
+    }
+
+    /* 动画容器样式 */
+    .box {
+      position: relative;         /* 相对定位，作为子元素的定位参考 */
+      width: var(--box-size);     /* 宽度 */
+      height: var(--box-size);    /* 高度 */
+      overflow: hidden;           /* 溢出内容隐藏 */
+      /* 创建下方倒影效果，增强视觉深度 */
+      -webkit-box-reflect: below 2px linear-gradient(transparent, rgba(20, 0, 85, 0.5));
+      background: rgba(0, 255, 255, 0.1); /* 半透明背景 */
+      /* 基础发光效果 */
+      box-shadow: 0 0 5px var(--color-primary),
+                  0 0 25px var(--color-primary);
+    }
+
+    /* 边框动画元素的公共样式 */
+    .box span {
+      position: absolute;         /* 绝对定位 */
+      display: block;
+    }
+
+    /* 顶部边框动画 */
+    .box span:nth-child(1) {
+      top: 0;                     /* 顶部对齐 */
+      left: -100%;                /* 初始位置在容器左侧外部 */
+      width: 100%;                /* 宽度等于容器宽度 */
+      height: 4px;                /* 高度（边框粗细） */
+      /* 从透明到青色的水平渐变 */
+      background: linear-gradient(90deg, transparent, var(--color-primary));
+      animation: animate1 1s linear infinite; /* 应用动画：2秒周期，线性速度，无限循环 */
+    }
+
+    @keyframes animate1 {
+      0% { left: -100%; }          /* 动画开始：完全在容器左侧外部 */
+      100% { left: 100%; }         /* 动画结束：完全在容器右侧外部 */
+    }
+
+    /* 右侧边框动画 */
+    .box span:nth-child(2) {
+      right: 0;                   /* 右侧对齐 */
+      top: -100%;                 /* 初始位置在容器顶部外部 */
+      height: 100%;               /* 高度等于容器高度 */
+      width: 4px;                 /* 宽度（边框粗细） */
+      /* 从透明到青色的垂直渐变 */
+      background: linear-gradient(180deg, transparent, var(--color-primary));
+      animation: animate2 1s linear infinite; /* 应用动画，延迟0.5秒开始 */
+      animation-delay: 0.5s;
+    }
+
+    @keyframes animate2 {
+      0% { top: -100%; }           /* 动画开始：完全在容器顶部外部 */
+      100% { top: 100%; }          /* 动画结束：完全在容器底部外部 */
+    }
+
+    /* 底部边框动画 */
+    .box span:nth-child(3) {
+      bottom: 0;                  /* 底部对齐 */
+      left: 100%;                 /* 初始位置在容器右侧外部 */
+      width: 100%;                /* 宽度等于容器宽度 */
+      height: 4px;                /* 高度（边框粗细） */
+      /* 从透明到青色的反向水平渐变 */
+      background: linear-gradient(270deg, transparent, var(--color-primary));
+      animation: animate3 1s linear infinite; /* 应用动画，延迟1秒开始 */
+      animation-delay: 1s;
+    }
+
+    @keyframes animate3 {
+      0% { left: 100%; }           /* 动画开始：完全在容器右侧外部 */
+      100% { left: -100%; }        /* 动画结束：完全在容器左侧外部 */
+    }
+
+    /* 左侧边框动画 */
+    .box span:nth-child(4) {
+      left: 0;                    /* 左侧对齐 */
+      top: 100%;                  /* 初始位置在容器底部外部 */
+      height: 100%;               /* 高度等于容器高度 */
+      width: 4px;                 /* 宽度（边框粗细） */
+      /* 从透明到青色的反向垂直渐变 */
+      background: linear-gradient(0deg, transparent, var(--color-primary));
+      animation: animate4 1s linear infinite; /* 应用动画，延迟1.5秒开始 */
+      animation-delay: 1.5s;
+    }
+
+    @keyframes animate4 {
+      0% { top: 100%; }           /* 动画开始：完全在容器底部外部 */
+      100% { top: -100%; }         /* 动画结束：完全在容器顶部外部 */
+    }
+  </style>
+</head>
+<body>
+  <!-- 动画容器，包含四个边框动画元素 -->
+  <div class="box">
+    <span></span> <!-- 顶部边框 -->
+    <span></span> <!-- 右侧边框 -->
+    <span></span> <!-- 底部边框 -->
+    <span></span> <!-- 左侧边框 -->
+  </div>
+</body>
+</html>  
