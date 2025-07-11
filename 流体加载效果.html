@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #111;
+  }
+  .loader{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    filter: url(#geepgy);
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+  }
+  .loader span{
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* background: skyblue; */
+    transform: rotate(calc(var(--i) * 45deg));
+    /* animation: animate 2s linear infinite; */
+    /* animation-delay: calc(var(--i) * 0.1s); */
+  }
+  .loader span::before{ 
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg,#fff,rgb(135, 210, 235));
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgb(3, 174, 242)
+  }
+  .roate{
+    animation: aminate 1s linear infinite; 
+    animation-delay: calc(var(--j) * 0.2s);
+  }
+  @keyframes aminate{
+    0%{
+      transform: rotate(0deg);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+svg{
+  width: 0;
+  height: 0;
+
+}
+  
+</style>
+<body>
+  <section>
+    <svg>
+      <filter id="geepgy">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10"></feGaussianBlur>
+        <feColorMatrix values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 20 -10"></feColorMatrix>
+      </filter>
+    </svg>
+    <div class="loader">
+      <span style="--i:1"></span>
+      <span style="--i:2"></span>
+      <span style="--i:3"></span>
+      <span style="--i:4"></span>
+      <span style="--i:5"></span>
+      <span style="--i:6"></span>
+      <span style="--i:7"></span>
+      <span style="--i:8"></span>
+      <span class="roate" style="--j:0"></span>
+      <span class="roate" style="--j:1"></span>
+      <span class="roate" style="--j:2"></span>
+      <span class="roate" style="--j:3"></span>
+      <span class="roate" style="--j:4"></span>
+
+
+    </div>
+
+    </div>
+  </section>
+  
+</body>
+</html>
