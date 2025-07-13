@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>炫酷流体加载</title>
+  <style>
+    /* 基础样式重置 */
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #0b0c0f; /* 深色背景突出光效 */
+      overflow: hidden; /* 防止内容溢出导致滚动条出现 */
+    }
+    
+    .loader {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      filter: url(#fluidFilter); /* 应用流体滤镜 */
+      animation: scalePulse 6s infinite ease-in-out; /* 整体呼吸缩放动画 */
+    }
+    
+    .loader span {
+      position: absolute;
+      top: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%;
+      transform: rotate(calc(var(--i) * 45deg)); /* 8个元素均匀分布在圆周上 */
+    }
+    
+    .loader span::before { 
+      content: '';
+      position: absolute;
+      top: calc(50% - 15px); /* 垂直居中 */
+      left: calc(50% - 15px); /* 水平居中 */
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(45deg, #6ee7ff, #ff61d8); /* 渐变色光珠 */
+      border-radius: 50%;
+      box-shadow: 0 0 25px #6ee7ff, 0 0 40px #ff61d8; /* 双重光晕效果 */
+      animation: orbit 2s infinite linear; /* 轨道运动动画 */
+      animation-delay: calc(var(--i) * 0.15s); /* 每个光珠错开启动时间 */
+    }
+
+    /* 光珠的轨道运动动画 - 从边缘到中心再回到边缘 */
+    @keyframes orbit {
+      0% {
+        transform: translate(-120%, 0) scale(0.8); /* 起始位置在外围，较小 */
+        opacity: 0.6; /* 半透明 */
+      }
+      50% {
+        transform: translate(0, 0) scale(1.2); /* 中间位置放大 */
+        opacity: 1; /* 完全不透明 */
+      }
+      100% {
+        transform: translate(-120%, 0) scale(0.8); /* 回到起始位置 */
+        opacity: 0.6;
+      }
+    }
+
+    /* SVG滤镜 - 增强流体融合效果 */
+    #fluidFilter {
+      filterUnits: objectBoundingBox;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 整体加载器的呼吸缩放动画 */
+    @keyframes scalePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); } /* 轻微放大 */
+    }
+  </style>
+</head>
+<body>
+  <!-- SVG滤镜定义 - 用于创建流体融合效果 -->
+  <svg width="0" height="0">
+    <filter id="fluidFilter">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/> <!-- 高斯模糊 -->
+      <feColorMatrix 
+        in="blur" 
+        type="matrix"
+        values="
+          1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 15 -8" 
+        result="glow"/> <!-- 颜色矩阵增强发光效果 -->
+      <feBlend in="SourceGraphic" in2="glow" mode="screen"/> <!-- 混合原始图形和发光效果 -->
+    </filter>
+  </svg>
+
+  <!-- 加载器容器 - 包含8个均匀分布的光珠 -->
+  <div class="loader">
+    <!-- 通过CSS变量控制每个光珠的旋转角度和动画延迟 -->
+    <span style="--i:1"></span>
+    <span style="--i:2"></span>
+    <span style="--i:3"></span>
+    <span style="--i:4"></span>
+    <span style="--i:5"></span>
+    <span style="--i:6"></span>
+    <span style="--i:7"></span>
+    <span style="--i:8"></span>
+  </div>
+</body>
+</html>
