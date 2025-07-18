@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fluid Loading</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        ul li {
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            margin: 0 5px;
+            border-radius: 50%;
+            /* 动态渐变，用 JS 控制更灵活，这里示例用静态渐变 */
+            background: linear-gradient(90deg, #45aaf2, #2b7bda);
+            animation: bounce 1.4s linear infinite;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        /* 基础弹跳 */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            60% { transform: translateY(0); }
+            80% { transform: translateY(-22px); }
+        }
+        /* 鼠标悬浮时，放大 + 变色 */
+        ul li:hover {
+            transform: scale(1.3);
+            background: linear-gradient(90deg, #ffe75e, #ffc400);
+            box-shadow: 0 0 20px #ffc400;
+        }
+        /* 延迟配置 */
+        ul li:nth-child(1) { animation-delay: 0s; }
+        ul li:nth-child(2) { animation-delay: -1.2s; }
+        ul li:nth-child(3) { animation-delay: -1s; }
+        ul li:nth-child(4) { animation-delay: -0.8s; }
+        ul li:nth-child(5) { animation-delay: -0.6s; }
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>
