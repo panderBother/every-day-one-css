@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D 柱状loading动画</title>
+    <style>
+        /* 全局样式初始化，清除body默认的内外边距，设置背景色为深色系，营造科技感背景 */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #11263a;
+        }
+        /* 外层容器，用于定位整个3D动画组件 */
+        .box {
+            position: absolute;
+            /* 利用calc计算，让容器水平垂直居中 */
+            top: calc(50% - 100px);
+            left: calc(50% - 135px);
+            height: 200px;
+            width: 500px;
+            transform-style: preserve-3d; /* 开启3D变换空间，让子元素能在3D空间变换 */
+            transform: perspective(1000px) rotateY(45deg); /* 设置透视效果和Y轴旋转，营造3D视觉 */
+        }
+
+        /* 内部包裹span的容器，用于统一控制子元素的3D变换环境 */
+        .box div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex; /* 用flex布局让内部span水平排列 */
+            transform-style: preserve-3d; /* 让子元素（span及其伪元素）也能在3D空间变换 */
+        }
+
+        /* 每个柱状条的样式，作为动画的主体元素 */
+        .box div span {
+            position: relative;
+            display: block;
+            width: 50px;
+            height: 100%;
+            /* 背景渐变，模拟金属质感的颜色过渡，从浅灰到深灰再到浅灰 */
+            background: linear-gradient(#e8e8e8, #a7a7a7, #e8e8e8);
+            animation: animate 2.8s linear infinite; /* 应用名为animate的动画，线性运动、无限循环 */
+        }
+
+        /* 给每个柱状条添加伪元素，用于模拟3D立体效果的侧面 */
+        .box div span:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000; /* 黑色，作为立体侧面的颜色 */
+            transform-style: preserve-3d;
+            /* 沿X轴平移、Y轴旋转、Y轴方向缩放，构建出立体的侧面效果，让柱状条看起来有厚度 */
+            transform: translateX(-25px) rotateY(45deg) scaleY(0.5);
+        }
+
+        /* 定义动画关键帧，实现柱状条绕X轴旋转360度的效果 */
+        @keyframes animate {
+            0% {
+                transform: rotateX(0deg); /* 初始状态，不旋转 */
+            }
+            100% {
+                transform: rotateX(360deg); /* 结束状态，旋转360度 */
+            }
+        }
+
+        /* 为每个span元素设置不同的动画延迟，形成依次动画的视觉效果 */
+        .box div span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .box div span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .box div span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .box div span:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .box div span:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .box div span:nth-child(6) {
+            animation-delay: 1s;
+        }
+
+        .box div span:nth-child(7) {
+            animation-delay: 1.2s;
+        }
+
+        .box div span:nth-child(8) {
+            animation-delay: 1.4s;
+        }
+
+        .box div span:nth-child(9) {
+            animation-delay: 1.6s;
+        }
+
+        .box div span:nth-child(10) {
+            animation-delay: 1.8s;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 最外层容器，承载整个3D动画结构 -->
+<div class="box">
+    <!-- 内部flex容器，用于排列多个柱状条span -->
+    <div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+</body>
+
+</html>
