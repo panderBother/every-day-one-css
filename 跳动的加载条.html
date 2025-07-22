@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代加载动画</title>
+    <style>
+        /*
+         * 全局样式重置
+         * 清除默认内外边距，设置box-sizing为border-box确保尺寸计算一致性
+         */
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /*
+         * 页面主体样式
+         * 使用flex布局使加载动画居中显示，设置柔和的渐变背景
+         * min-height: 100vh确保页面占满整个视口高度
+         */
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+            min-height: 100vh;
+            /* 添加轻微的页面字体渲染优化 */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /*
+         * 加载动画容器
+         * 使用flex布局使内部元素水平排列
+         * 添加padding和背景使动画区域更突出
+         */
+        .loader{
+            display: flex;
+            flex-direction: row;
+            padding: 30px 40px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /*
+         * 加载柱形样式
+         * 每个柱形作为小球的运动轨道
+         * 使用渐变和阴影创建立体效果和深度感
+         */
+        .loader div{
+            position: relative;
+            width: 40px;
+            height: 200px;
+            margin: 0 12px; /* 减小间距使动画更紧凑 */
+            overflow: hidden; /* 隐藏超出容器的内容 */
+            border-radius: 40px; /* 大圆角使柱形更圆润 */
+
+            /* 主体背景渐变 - 创造金属质感 */
+            background: linear-gradient(to bottom,
+            rgba(0,0,0,0.03),
+            #edf1f4 5%,
+            #edf1f4 95%,
+            rgba(0,0,0,0.03)
+            );
+
+            /* 边框和阴影效果 - 增强立体感 */
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow:
+                    5px 5px 15px rgba(0,0,0,0.05), /* 右侧和底部阴影 */
+                    -5px -5px 15px rgba(255,255,255,0.8), /* 左侧和顶部高光 */
+                    inset -5px -5px 5px rgba(255,255,255,0.6), /* 内部顶部高光 */
+                    inset 5px 5px 5px rgba(0,0,0,0.03); /* 内部底部阴影 */
+            transition: all 0.3s ease; /* 为悬停效果添加过渡动画 */
+        }
+
+        /*
+         * 柱形顶部装饰层
+         * 创造更复杂的光影效果，增强柱形的立体感
+         * 位置绝对定位，覆盖在柱形顶部
+         */
+        .loader div::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10; /* 确保在主体之上 */
+            border-radius: 40px;
+
+            /* 半透明遮罩效果 - 增强深度感 */
+            box-shadow:
+                    inset 0 2px 2px rgba(255,255,255,0.8),
+                    inset 0 -2px 2px rgba(0,0,0,0.05);
+            pointer-events: none; /* 确保鼠标事件能穿透此层 */
+        }
+
+        /*
+         * 动画小球样式
+         * 使用伪元素创建运动的小球和底部的颜色块
+         * 通过CSS变量(--i)控制每个小球的动画延迟
+         */
+        .loader div::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 36px; /* 略小于柱形宽度，留出边距 */
+            height: 36px;
+            border-radius: 50%; /* 圆形 */
+
+            /* 小球样式 - 渐变和阴影增强立体感 */
+            background: linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    #f0f4f8 100%
+            );
+            box-shadow:
+                    inset -3px -3px 5px rgba(0,0,0,0.2), /* 小球内部阴影 */
+                    0 2px 5px rgba(0,0,0,0.1); /* 小球外部阴影 */
+
+            /* 底部颜色块 - 小球落下时显示的颜色 */
+            /* 从蓝色渐变到青色，增强视觉效果 */
+            box-shadow:
+                    inset -5px -5px 5px rgba(0,0,0,0.2),
+                    0 420px 0 400px #2b7bda;
+
+            /* 动画属性设置 */
+            animation: animate 1.5s ease-in-out infinite;
+            transform: translateY(160px); /* 初始位置在底部 */
+            animation-delay: calc(0.15s * var(--i)); /* 每个小球延迟不同时间开始动画 */
+            z-index: 5; /* 确保在顶部装饰层之下 */
+        }
+
+        /*
+         * 柱形悬停效果
+         * 鼠标悬停时轻微放大并增强阴影，提供交互反馈
+         */
+        .loader div:hover {
+            transform: scale(1.05);
+            box-shadow:
+                    5px 5px 20px rgba(0,0,0,0.12),
+                    -5px -5px 15px rgba(255,255,255,0.8),
+                    inset -5px -5px 5px rgba(255,255,255,0.6),
+                    inset 5px 5px 5px rgba(0,0,0,0.05);
+        }
+
+        /*
+         * 动画关键帧定义
+         * 控制小球的上下运动轨迹
+         * 添加色调旋转效果使颜色随动画变化
+         */
+        @keyframes animate{
+            0%{
+                transform: translateY(160px);
+                filter: hue-rotate(0deg); /* 初始色调 */
+            }
+            50%{
+                transform: translateY(0px); /* 运动到顶部 */
+                filter: hue-rotate(180deg); /* 中间点色调变化 */
+            }
+            100%{
+                transform: translateY(160px); /* 回到底部 */
+                filter: hue-rotate(360deg); /* 结束时回到初始色调 */
+            }
+        }
+
+        /*
+         * 加载文字提示
+         * 为动画添加文字说明，增强用户体验
+         */
+        .loading-text {
+            position: absolute;
+            top: 75%;
+            color: #6b7c93;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+<!-- 加载动画容器 -->
+<div>
+    <!-- 加载柱形组 -->
+    <div class="loader">
+        <div style="--i:0"></div>
+        <div style="--i:1"></div>
+        <div style="--i:2"></div>
+        <div style="--i:3"></div>
+        <div style="--i:4"></div>
+    </div>
+    <!-- 加载提示文字 -->
+    <div class="loading-text">正在加载，请稍候...</div>
+</div>
+</body>
+</html>
