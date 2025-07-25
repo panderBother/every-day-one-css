@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        background: rgba(33, 33, 35,0.5);
+    }
+    .box{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        margin: 0;
+        padding: 0;
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        border: 10px solid rgba(255,255,255);
+        background: linear-gradient(0deg, rgb(207, 110, 255, 0.5), rgb(15, 101, 188, 0.5));
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        overflow: hidden;
+    }
+    .box::before{
+        content: '';
+        position: absolute;
+        top: 80%;
+        left: 55%;
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+        filter: blur(2px);
+        animation: glow 1s linear infinite;
+    }
+    .box::after{
+        content: '';
+        position: absolute;
+        top: 70%;
+        left: 55%;
+        width: 6px;
+        height: 6px;
+        background:#fff;
+        border-radius: 50%;
+        filter: blur(2px);
+        animation: glow 1s linear infinite;
+    }
+    .box li:nth-child(1),
+    .box li:nth-child(2),
+    .box li:nth-child(3),
+    .box li:nth-child(4)
+    {
+        list-style: none;
+        position: absolute;
+        top : 50%;
+        height: 1px;
+        width: 100%;
+        background: rgba(255,255,255,0.5);
+    }
+    .box li:nth-child(2){
+        transform: rotate(90deg);
+    }
+    .box li:nth-child(3){
+        transform: rotate(45deg);
+    }
+    .box li:nth-child(4){
+        transform: rotate(135deg);
+    }
+    .box li:nth-child(5),
+    .box li:nth-child(6),
+    .box li:nth-child(7){
+        list-style: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        border: 1px solid rgba(255,255,255,0.5);
+        background: transparent;
+        border-radius: 50%;
+    }
+    .box li:nth-child(5){
+        width: 120px;
+        height: 120px;
+    }
+    .box li:nth-child(6){
+        width: 240px;
+        height: 240px;
+    }
+    .box li:nth-child(7){
+        width: 360px;
+        height: 360px;
+    }
+    .box li:nth-child(8){
+        list-style: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 250px;
+        height: 250px;
+        transform-origin: top left;
+        background: linear-gradient(45deg, #fff, 1%,transparent 50%);
+        animation: animate 3s linear infinite;
+    }
+    @keyframes animate {
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes glow {
+        0%{
+            transform: translate(-50%,-50%) scale(0);
+        }
+        50%{
+            transform: translate(-50%,-50%) scale(1);
+        }
+        100%{
+            transform: translate(-50%,-50%) scale(0);
+        }
+    }
+</style>
+<body>
+<div class="box">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</div>
+
+</body>
+</html>
