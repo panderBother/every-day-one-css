@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        animation: pulse infinite 5s;
+    }
+    @keyframes pulse{
+        0%{
+            background: #ff0;
+        }
+        50%{
+            background: #00f;
+        }
+        100%{
+            background: #0f0;
+        }
+    }
+    .box{
+        width: 50%;
+        background: #fff;
+        margin: 300px auto;
+        position: relative;
+        padding: 20px 40px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .loading{
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: 10px;
+        background: #eee;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .loading::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 100%;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+        animation: load infinite 5s;
+    }
+    @keyframes load{
+        0%{
+            width: 0;
+            background: #ff0;
+        }
+        50%{
+            width: 70%;
+            background: #00f;
+        }
+        100%{
+            width: 100%;
+            background: #0f0;
+        }
+    }
+</style>
+<body>
+<div class="box">
+    <div class="loading"></div>
+</div>
+
+</body>
+</html>
