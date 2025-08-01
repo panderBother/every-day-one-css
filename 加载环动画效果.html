@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        font-family: verdana;
+    }
+    .center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .ring{
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        box-shadow: 0 3px 0 #272b2b;
+        background: transparent;
+        animation: animate 1s linear infinite;
+    }
+    .text{
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        line-height: 300px;
+        font-size: 2rem;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+
+    }
+    @keyframes animate{
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<body>
+<div class="center">
+    <div class="text"> Loading</div>
+    <div class="ring"></div>
+</div>
+
+</body>
+</html>
